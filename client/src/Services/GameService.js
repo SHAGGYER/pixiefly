@@ -133,24 +133,6 @@ export default class GameService {
     return minPlayerAttackMonster;
   };
 
-  static GetMaxOpponentAttackMonsterField = (gameState) => {
-    let maxOpponentAttackMonster;
-
-    const availableOpponentMonsterFields = gameState.opponentMonsterFields.filter(
-      (field) => field.card,
-    );
-
-    if (availableOpponentMonsterFields.length) {
-      maxOpponentAttackMonster = availableOpponentMonsterFields.reduce(
-        (prev, current) => {
-          return prev.card.attack < current.card.attack ? prev : current;
-        },
-      );
-    }
-
-    return maxOpponentAttackMonster;
-  };
-
   static GetMaxOpponentAttackMonsterCard = (gameState) => {
     let maxOpponentAttackMonster;
     if (gameState.opponentCards.length) {
@@ -170,11 +152,10 @@ export default class GameService {
     for (let [index, field] of gameState.opponentMonsterFields.entries()) {
       if (field.card && field.card.effect) {
         let cardReturn = field.card.effect(gameState);
-        if (cardReturn.length) {
+        if (cardReturn && cardReturn.length) {
           _gameState.opponentMonsterFields[index].card = cardReturn[0];
           cardGameState = cardReturn[1];
         }
-
       }
     }
 
@@ -199,7 +180,7 @@ export default class GameService {
     } else if (
       maxOpponentAttackMonster &&
       minPlayerAttackMonster &&
-      minPlayerAttackMonster.card.attack > maxOpponentAttackMonster.card.attack
+      minPlayerAttackMonster.card.attack >= maxOpponentAttackMonster.card.attack
     ) {
       return false;
     } else if (maxOpponentAttackMonster) {

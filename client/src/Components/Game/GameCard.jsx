@@ -3,7 +3,15 @@ import CardBack from '../../Images/card_back.jpg';
 import { useClickOutside } from '../../Hooks/ClickOutside';
 import Button from '../Button/Button';
 
-export default function ({ isBack, title, attack, defense, onPut }) {
+export default function ({
+  isBack,
+  title,
+  attack,
+  defense,
+  onPut,
+  disabled,
+  onAttack,
+}) {
   const cardRef = useRef(null);
   const [overlayActive, setOverlayActive] = useState(false);
 
@@ -27,7 +35,7 @@ export default function ({ isBack, title, attack, defense, onPut }) {
           onMouseEnter={() => setOverlayActive(true)}
           onMouseLeave={() => setOverlayActive(false)}
         >
-          {onPut && (
+          {(onAttack || onPut) && (
             <div
               style={{
                 left: '50%',
@@ -36,12 +44,25 @@ export default function ({ isBack, title, attack, defense, onPut }) {
               }}
               className={'absolute ' + (overlayActive ? 'block' : 'hidden')}
             >
-              <Button
-                onClick={handleOnPut}
-                className="bg-gray-500 text-white rounded hover:bg-gray-700"
-              >
-                PUT
-              </Button>
+              {onPut && (
+                <Button
+                  disabled={disabled}
+                  onClick={handleOnPut}
+                  className="bg-gray-500 text-white rounded hover:bg-gray-700"
+                >
+                  PUT
+                </Button>
+              )}
+
+              {onAttack && (
+                <Button
+                  disabled={disabled}
+                  onClick={onAttack}
+                  className="bg-gray-500 text-white rounded hover:bg-gray-700"
+                >
+                  ATTACK
+                </Button>
+              )}
             </div>
           )}
           <div className="flex-grow">

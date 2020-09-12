@@ -6,8 +6,4 @@ export default class CardSuperWarrior {
   attack = 2500;
   defense = 1200;
   uuid = v4();
-
-  effect(gameState) {
-    this.attack += 500;
-  }
 }

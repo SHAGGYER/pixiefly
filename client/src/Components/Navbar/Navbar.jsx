@@ -50,6 +50,9 @@ export default function () {
         )}
         {user && (
           <div className="ml-auto flex">
+            <Link className="mr-5 text-black hover:text-gray-600" to="/game">
+              Game
+            </Link>
             <NavbarSubmenu title="Konto" items={userItems} />
           </div>
         )}
