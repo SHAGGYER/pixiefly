@@ -1,0 +1,22 @@
+.billing {
+    display: grid;
+    grid-template-columns: 3fr 7fr;
+    grid-gap: 1rem;
+}
+
+.billing__right {
+    border: 1px solid #ccc;
+    padding: 0.5rem;
+}
+
+.billing__section-title {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 1rem;
+}
+
+@media screen and (max-width: 900px) {
+    .billing {
+        grid-template-columns: 1fr;
+    }
+}
