@@ -1,34 +1,37 @@
-import React from 'react';
-import HttpClient from './Services/HttpClient';
-import { Switch, Route, Redirect } from 'react-router-dom';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import AppContext from './Contexts/AppContext';
-import Install from './Pages/Install/Install';
-import Login from './Pages/Login/Login';
-import Sidebar from './Components/Sidebar/Sidebar';
-import Dashboard from './Pages/Dashboard/Dashboard';
-import Register from './Pages/Register/Register';
-import Modal from 'react-modal';
-import Navbar from './Components/Navbar/Navbar';
-import DashboardGuest from './Pages/Dashboard/DashboardGuest';
-import Game from './Pages/Game/Game';
+import React from "react";
+import HttpClient from "./Services/HttpClient";
+import { Switch, Route, Redirect } from "react-router-dom";
+import { useState } from "react";
+import { useEffect } from "react";
+import AppContext from "./Contexts/AppContext";
+import Install from "./Pages/Install/Install";
+import Login from "./Pages/Login/Login";
+import Sidebar from "./Components/Sidebar/Sidebar";
+import Dashboard from "./Pages/Dashboard/Dashboard";
+import Register from "./Pages/Register/Register";
+import Modal from "react-modal";
+import Navbar from "./Components/Navbar/Navbar";
+import DashboardGuest from "./Pages/Dashboard/DashboardGuest";
+import Game from "./Pages/Game/Game";
+import io from "socket.io-client";
 
-Modal.setAppElement('#root');
+Modal.setAppElement("#root");
 
 function App() {
   const [user, setUser] = useState(null);
   const [initiated, setInitiated] = useState(false);
   const [installed, setInstalled] = useState(false);
+  const [socket, setSocket] = useState(null);
 
   useEffect(() => {
     init();
   }, []);
 
   const init = async () => {
-    const { data } = await HttpClient().get('/api/auth/init');
+    const { data } = await HttpClient().get("/api/auth/init");
     if (data.user) {
       setUser(data.user);
+      setSocket(io());
     }
     setInstalled(data.installed);
 
@@ -36,9 +39,9 @@ function App() {
   };
 
   const logout = () => {
-    localStorage.removeItem('token');
+    localStorage.removeItem("token");
     setUser(null);
-    window.location = '/';
+    window.location = "/";
   };
 
   return (
@@ -47,7 +50,7 @@ function App() {
         <>
           {installed ? (
             <section>
-              <AppContext.Provider value={{ user, setUser, logout }}>
+              <AppContext.Provider value={{ user, setUser, logout, socket }}>
                 <Navbar />
                 <Switch>
                   <Route path="/" exact>

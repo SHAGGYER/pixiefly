@@ -1,7 +1,7 @@
-import React, { useRef, useState } from 'react';
-import CardBack from '../../Images/card_back.jpg';
-import { useClickOutside } from '../../Hooks/ClickOutside';
-import Button from '../Button/Button';
+import React, { useRef, useState } from "react";
+import CardBack from "../../Images/card_back.jpg";
+import { useClickOutside } from "../../Hooks/ClickOutside";
+import Button from "../Button/Button";
 
 export default function ({
   isBack,
@@ -10,6 +10,8 @@ export default function ({
   defense,
   onPut,
   disabled,
+  hasEffect,
+  onEffect,
   onAttack,
 }) {
   const cardRef = useRef(null);
@@ -35,14 +37,14 @@ export default function ({
           onMouseEnter={() => setOverlayActive(true)}
           onMouseLeave={() => setOverlayActive(false)}
         >
-          {(onAttack || onPut) && (
+          {(onAttack || onPut || hasEffect) && (
             <div
               style={{
-                left: '50%',
-                top: '50%',
-                transform: 'translate(-50%, -50%)',
+                left: "50%",
+                top: "50%",
+                transform: "translate(-50%, -50%)",
               }}
-              className={'absolute ' + (overlayActive ? 'block' : 'hidden')}
+              className={"absolute " + (overlayActive ? "block" : "hidden")}
             >
               {onPut && (
                 <Button
@@ -61,6 +63,15 @@ export default function ({
                   className="bg-gray-500 text-white rounded hover:bg-gray-700"
                 >
                   ATTACK
+                </Button>
+              )}
+
+              {hasEffect && onEffect && (
+                <Button
+                  onClick={onEffect}
+                  className="bg-gray-500 text-white rounded hover:bg-gray-700"
+                >
+                  ACTIVATE
                 </Button>
               )}
             </div>

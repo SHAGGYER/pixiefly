@@ -1,13 +1,13 @@
 export default class GameService {
   static Deal = (gameState) => {
     const maxPlayerAttackMonster = GameService.GetMaxPlayerAttackMonsterField(
-      gameState,
+      gameState
     );
     const hasAvailablePlayerMonsterFields = GameService.IsPlayerMonsterFieldAvailable(
-      gameState,
+      gameState
     );
     const maxOpponentAttackMonsterCard = GameService.GetMaxOpponentAttackMonsterCard(
-      gameState,
+      gameState
     );
 
     if (
@@ -22,7 +22,7 @@ export default class GameService {
         opponentCards,
       } = GameService.OnCardPutOpponent(
         gameState,
-        maxOpponentAttackMonsterCard,
+        maxOpponentAttackMonsterCard
       );
       return { ...gameState, opponentMonsterFields, opponentCards };
     }
@@ -33,46 +33,58 @@ export default class GameService {
     return gameState.playerMonsterFields.filter((field) => !field.card).length;
   };
 
+  static IsPlayerMagicFieldAvailable = (gameState) => {
+    return gameState.playerMagicFields.filter((field) => !field.card).length;
+  };
+
   static FindAvailablePlayerMonsterFieldIndex = (gameState) => {
     return gameState.playerMonsterFields.findIndex((field) => !field.card);
   };
 
-  static IsOpponentMonsterFieldAvailable = (gameState) => {
-    return gameState.opponentMonsterFields.filter((field) => !field.card)
-      .length;
-  };
-
-  static FindAvailableOpponentMonsterFieldIndex = (gameState) => {
-    return gameState.opponentMonsterFields.findIndex((field) => !field.card);
+  static FindAvailablePlayerMagicFieldIndex = (gameState) => {
+    return gameState.playerMagicFields.findIndex((field) => !field.card);
   };
 
   static FindOpponentCardIndex = (gameState, card) => {
     return gameState.opponentCards.findIndex(
-      (_card) => _card.uuid === card.uuid,
+      (_card) => _card.uuid === card.uuid
     );
   };
 
   static OnCardPutPlayer(gameState, card, index) {
+    const _monsterFields = [...gameState.playerMonsterFields];
+    const _magicFields = [...gameState.playerMagicFields];
+    const _cards = [...gameState.playerCards];
+    let _playerAmountSummons = gameState.playerAmountSummons;
+
     if (
+      card.category === "monster" &&
       GameService.IsPlayerMonsterFieldAvailable(gameState) &&
       gameState.playerAmountSummons < gameState.playerMaxSummons
     ) {
-      const _cards = [...gameState.playerCards];
       _cards.splice(index, 1);
       const _index = GameService.FindAvailablePlayerMonsterFieldIndex(
-        gameState,
+        gameState
       );
-      const _fields = [...gameState.playerMonsterFields];
-      _fields[_index].card = card;
-      return {
-        ...gameState,
-        playerCards: _cards,
-        playerMonsterFields: _fields,
-        playerAmountSummons: gameState.playerAmountSummons + 1,
-      };
+      _monsterFields[_index].card = card;
+
+      _playerAmountSummons += 1;
+    } else if (
+      card.category === "magic" &&
+      GameService.IsPlayerMagicFieldAvailable(gameState)
+    ) {
+      _cards.splice(index, 1);
+      const _index = GameService.FindAvailablePlayerMagicFieldIndex(gameState);
+      _magicFields[_index].card = card;
     }
 
-    return { ...gameState };
+    return {
+      ...gameState,
+      playerCards: _cards,
+      playerMonsterFields: _monsterFields,
+      playerMagicFields: _magicFields,
+      playerAmountSummons: _playerAmountSummons,
+    };
   }
 
   static OnCardPutOpponent(gameState, card) {
@@ -84,7 +96,7 @@ export default class GameService {
       _cards.splice(index, 1);
 
       const _index = GameService.FindAvailableOpponentMonsterFieldIndex(
-        gameState,
+        gameState
       );
       const _fields = [...gameState.opponentMonsterFields];
       _fields[_index].card = card;
@@ -102,14 +114,14 @@ export default class GameService {
     let maxPlayerAttackMonster;
 
     const availablePlayerMonsterCards = gameState.playerMonsterFields.filter(
-      (field) => field.card,
+      (field) => field.card
     );
 
     if (availablePlayerMonsterCards.length) {
       maxPlayerAttackMonster = availablePlayerMonsterCards.reduce(
         (prev, current) => {
           return prev.card.attack > current.card.attack ? prev : current;
-        },
+        }
       );
     }
 
@@ -120,13 +132,13 @@ export default class GameService {
     let minPlayerAttackMonster;
 
     const availablePlayerMonsterFields = gameState.playerMonsterFields.filter(
-      (field) => field.card,
+      (field) => field.card
     );
     if (availablePlayerMonsterFields.length) {
       minPlayerAttackMonster = availablePlayerMonsterFields.reduce(
         (prev, current) => {
           return prev.card.attack < current.card.attack ? prev : current;
-        },
+        }
       );
     }
 
@@ -139,7 +151,7 @@ export default class GameService {
       maxOpponentAttackMonster = gameState.opponentCards.reduce(
         (prev, current) => {
           return prev.attack < current.attack ? prev : current;
-        },
+        }
       );
     }
 
@@ -164,11 +176,11 @@ export default class GameService {
 
   static ShouldAttack = (gameState) => {
     const minPlayerAttackMonster = GameService.GetMinPlayerAttackMonsterField(
-      gameState,
+      gameState
     );
     const maxOpponentAttackMonster = GameService.GetOpponentAttackMonster(
       gameState,
-      minPlayerAttackMonster,
+      minPlayerAttackMonster
     );
 
     if (
@@ -192,7 +204,7 @@ export default class GameService {
 
   static GetOpponentAttackMonster = (
     gameState,
-    minPlayerAttackMonsterField,
+    minPlayerAttackMonsterField
   ) => {
     let monster;
     const availableMonsters = gameState.opponentMonsterFields.filter(
@@ -204,7 +216,7 @@ export default class GameService {
             field.card) &&
           !gameState.opponentMonstersAttacked.includes(field.card.uuid)
         );
-      },
+      }
     );
 
     if (availableMonsters.length) {
@@ -218,20 +230,20 @@ export default class GameService {
 
   static Attack = (gameState) => {
     const minPlayerAttackMonsterField = GameService.GetMinPlayerAttackMonsterField(
-      gameState,
+      gameState
     );
 
     const opponentMonster = GameService.GetOpponentAttackMonster(
       gameState,
-      minPlayerAttackMonsterField,
+      minPlayerAttackMonsterField
     );
 
     if (minPlayerAttackMonsterField) {
-      console.log('attacking player monster');
+      console.log("attacking player monster");
       const index = gameState.playerMonsterFields.findIndex(
         (field) =>
           field.card &&
-          field.card.uuid === minPlayerAttackMonsterField.card.uuid,
+          field.card.uuid === minPlayerAttackMonsterField.card.uuid
       );
       const _playerMonsterFields = [...gameState.playerMonsterFields];
       _playerMonsterFields.splice(index, 1, {});
@@ -239,17 +251,17 @@ export default class GameService {
       return {
         ...gameState,
         playerMonsterFields: _playerMonsterFields,
-        opponentStatus: 'ending-attack',
+        opponentStatus: "ending-attack",
         opponentMonstersAttacked: [
           ...gameState.opponentMonstersAttacked,
           opponentMonster.card.uuid,
         ],
       };
     } else {
-      console.log('attacking lifepoints directly');
+      console.log("attacking lifepoints directly");
       return {
         ...gameState,
-        opponentStatus: 'ending-attack',
+        opponentStatus: "ending-attack",
         opponentMonstersAttacked: [
           ...gameState.opponentMonstersAttacked,
           opponentMonster.card.uuid,

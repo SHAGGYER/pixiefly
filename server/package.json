@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon pixiefly.js"
+    "start": "nodemon index.js"
   },
   "keywords": [],
   "author": "",
@@ -21,6 +21,7 @@
     "nodemailer": "^6.4.11",
     "nodemon": "^2.0.4",
     "pdfmake": "^0.1.68",
+    "socket.io": "^3.0.4",
     "stripe": "^8.92.0",
     "uuid": "^8.3.0"
   }
