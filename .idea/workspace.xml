@@ -1,8 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="eacf25b4-5270-4c3e-95e0-9ce2ed4c6cc2" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/server/src/Interfaces/ICard.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/Interfaces/IEffect.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/Interfaces/IEffectData.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/Interfaces/IGameData.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/Interfaces/IGameState.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/tsconfig.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/Components/Game/Game.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/Components/Game/Game.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/Pages/Game/Game.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/Pages/Game/Game.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/.env.example" beforeDir="false" afterPath="$PROJECT_DIR$/server/.env.example" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/Controllers/AuctionController.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/Controllers/AuctionController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/Controllers/AuthController.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/Controllers/AuthController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/Controllers/BillingController.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/Controllers/BillingController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/Controllers/SearchController.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/Controllers/SearchController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/Controllers/WebhooksController.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/Controllers/WebhooksController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/Data/Cards/DarkHole.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/Data/Cards/DarkHole.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/Data/Cards/EarthSoil.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/Data/Cards/EarthSoil.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/Data/Cards/Fairy.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/Data/Cards/Fairy.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/Data/Cards/SuperFairy.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/Data/Cards/SuperFairy.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/Data/Cards/SuperWarrior.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/Data/Cards/SuperWarrior.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/Middleware/Token.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/Middleware/Token.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/Models/Auction.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/Models/Auction.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/Models/RecentSearchResult.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/Models/RecentSearchResult.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/Models/User.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/Models/User.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/server/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -13,13 +42,21 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JavaScript File" />
+        <option value="tsconfig.json" />
+        <option value="TypeScript File" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="ProjectId" id="1hOAy5PoqUpjFJ82SYwAR2WLkD8" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -27,6 +64,7 @@
   <component name="PropertiesComponent">
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -37,12 +75,16 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="ts.external.directory.path" value="C:\htdocs\pixiefly\server\node_modules\typescript\lib" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/client/src/Data/Cards" />
       <recent name="$PROJECT_DIR$/server" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\htdocs\pixiefly\server\src" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -57,36 +99,25 @@
       <workItem from="1599922519319" duration="7061000" />
       <workItem from="1600165411858" duration="613000" />
       <workItem from="1600166039890" duration="599000" />
+      <workItem from="1644359074303" duration="609000" />
+      <workItem from="1644360122429" duration="462000" />
+      <workItem from="1644549478864" duration="2963000" />
+      <workItem from="1644553348806" duration="3722000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
-  <component name="WindowStateProjectService">
-    <state x="455" y="243" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1599872055272">
-      <screen x="0" y="23" width="1440" height="822" />
-    </state>
-    <state x="455" y="243" key="#com.intellij.fileTypes.FileTypeChooser/0.23.1440.822@0.23.1440.822" timestamp="1599872055271" />
-    <state width="1419" height="212" key="GridCell.Tab.0.bottom" timestamp="1600065608713">
-      <screen x="0" y="23" width="1440" height="822" />
-    </state>
-    <state width="1419" height="212" key="GridCell.Tab.0.bottom/0.23.1440.822@0.23.1440.822" timestamp="1600065608713" />
-    <state width="1419" height="212" key="GridCell.Tab.0.center" timestamp="1600065608711">
-      <screen x="0" y="23" width="1440" height="822" />
-    </state>
-    <state width="1419" height="212" key="GridCell.Tab.0.center/0.23.1440.822@0.23.1440.822" timestamp="1600065608711" />
-    <state width="1419" height="212" key="GridCell.Tab.0.left" timestamp="1600065608701">
-      <screen x="0" y="23" width="1440" height="822" />
-    </state>
-    <state width="1419" height="212" key="GridCell.Tab.0.left/0.23.1440.822@0.23.1440.822" timestamp="1600065608701" />
-    <state width="1419" height="212" key="GridCell.Tab.0.right" timestamp="1600065608712">
-      <screen x="0" y="23" width="1440" height="822" />
-    </state>
-    <state width="1419" height="212" key="GridCell.Tab.0.right/0.23.1440.822@0.23.1440.822" timestamp="1600065608712" />
-    <state x="385" y="169" width="670" height="676" key="search.everywhere.popup" timestamp="1599912567442">
-      <screen x="0" y="23" width="1440" height="822" />
-    </state>
-    <state x="385" y="169" width="670" height="676" key="search.everywhere.popup/0.23.1440.822@0.23.1440.822" timestamp="1599912567442" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

@@ -42,6 +42,12 @@ export default function ({ game }) {
   });
 
   useEffect(() => {
+    if (gameState) {
+      console.log(gameState)
+    }
+  }, [gameState])
+
+  useEffect(() => {
     socket.on("get-finish-draw-phase", (data) => {
       setGameState({
         ...gameState,
@@ -116,25 +122,12 @@ export default function ({ game }) {
       switch (gameState.currentPhase) {
         case "draw-phase":
           drawPhaseTimeout = setTimeout(() => {
-            console.log(gameState);
             socket.emit("revert-card-effect", {
               playerSocketId: getPlayer().socketId,
               opponentSocketId: getOpponent().socketId,
               gameState,
               type: "player",
             });
-            // gameState.opponentEffects.forEach((effect) => {
-            //   if (effect.untilTurn === gameState.currentTurn) {
-            //     socket.emit("revert-card-effect", {
-            //       playerSocketId: getPlayer().socketId,
-            //       opponentSocketId: getOpponent().socketId,
-            //       card: effect,
-            //       gameState,
-            //       type: "opponent",
-            //       effectId: effect.effectId,
-            //     });
-            //   }
-            // });
 
             const _playerDeck = [...gameState.playerDeck];
             const _playerCards = [...gameState.playerCards];

@@ -12,7 +12,6 @@ export default function () {
   useEffect(() => {
     socket.on("game-found", (game) => {
       setLoading(false);
-      console.log(game.turn);
       setGame(game);
     });
   }, []);

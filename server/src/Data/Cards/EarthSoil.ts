@@ -1,10 +1,16 @@
-module.exports = class CardEarthSoil {
+import {ICard} from "../../Interfaces/ICard";
+import {IEffectData} from "../../Interfaces/IEffectData";
+import {IGameData} from "../../Interfaces/IGameData";
+import {IEffect} from "../../Interfaces/IEffect";
+
+export default class CardEarthSoil implements ICard {
   title = "Earth Soil";
   effect = true;
   category = "magic";
   forTurns = 4;
+  uuid = null;
 
-  activateEffect({ gameState, card, effectId }) {
+  public activateEffect({ gameState, card, effectId }): IEffectData {
     const monsterFieldEffectExists = !!gameState.playerMonsterFields.find(
       (field) =>
         field.card &&
@@ -35,7 +41,7 @@ module.exports = class CardEarthSoil {
 
     return {
       card: {
-        ...this,
+        ...this as unknown as ICard,
       },
       gameStateOpponent: {
         opponentMonsterFields: gameState.playerMonsterFields,
@@ -49,18 +55,18 @@ module.exports = class CardEarthSoil {
   }
 
   revertCardEffect(
-    { gameState, type, gameStateOpponent, gameStatePlayer },
-    effect
-  ) {
+    { gameState, type, gameStateOpponent, gameStatePlayer }: IGameData,
+    effect: IEffect
+  ): IEffectData {
     if (type === "player") {
-      const index = gameState.playerMagicFields.findIndex(
+      const index = gameState.playerMagicFields!.findIndex(
         (field) => field.card && field.card.uuid === effect.uuid
       );
       if (index >= 0) {
-        gameState.playerMagicFields.splice(index, 1, {});
+        gameState.playerMagicFields!.splice(index, 1, {});
       }
 
-      gameState.playerMonsterFields.forEach((field) => {
+      gameState.playerMonsterFields!.forEach((field) => {
         if (field.card && field.card.type === "earth") {
           field.card.attack -= 500;
         }
@@ -82,37 +88,6 @@ module.exports = class CardEarthSoil {
       gameStatePlayer.playerMagicFields = gameState.playerMagicFields;
       gameStatePlayer.playerEffects = gameState.playerEffects;
     }
-    // else if (type === "opponent") {
-    //   const index = gameState.opponentMagicFields.findIndex(
-    //     (field) => field.card && field.card.uuid === card.uuid
-    //   );
-    //   if (index >= 0) {
-    //     gameState.opponentMagicFields.splice(index, 1, {});
-    //   }
-
-    //   const effectIndex = gameState.opponentEffects.findIndex(
-    //     (effect) => effect.uuid === card.uuid
-    //   );
-    //   if (effectIndex >= 0) {
-    //     gameState.opponentEffects.splice(index, 1);
-    //   }
-
-    //   gameState.opponentMonsterFields.forEach((field) => {
-    //     if (field.card && field.card.type === "earth") {
-    //       field.card.attack -= 500;
-    //     }
-    //   });
-    //   gameStateOpponent = {
-    //     playerMonsterFields: gameState.opponentMonsterFields,
-    //     playerMagicFields: gameState.opponentMagicFields,
-    //     playerEffects: gameState.opponentEffects,
-    //   };
-    //   gameStatePlayer = {
-    //     opponentMonsterFields: gameState.opponentMonsterFields,
-    //     opponentMagicFields: gameState.opponentMagicFields,
-    //     opponentEffects: gameState.opponentEffects,
-    //   };
-    // }
 
     return {
       gameState,

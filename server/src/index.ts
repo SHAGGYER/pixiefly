@@ -1,3 +1,6 @@
+import {ICard} from "./Interfaces/ICard";
+import {IGameData} from "./Interfaces/IGameData";
+
 require("dotenv").config();
 
 const express = require("express");
@@ -72,8 +75,9 @@ io.sockets.on("connection", (socket) => {
     io.to(data.opponentSocketId).emit("do-battle", data.gameState);
   });
 
-  socket.on("on-card-effect", (gameData) => {
-    const effectData = CARDS[gameData.card.uuid].activateEffect(gameData);
+  socket.on("on-card-effect", (gameData: IGameData) => {
+    const card = CARDS[gameData.card.uuid!] as ICard;
+    const effectData = card.activateEffect(gameData);
     io.to(gameData.opponentSocketId).emit("on-card-effect", {
       card: effectData.card,
       gameState: effectData.gameStateOpponent,
@@ -92,10 +96,12 @@ io.sockets.on("connection", (socket) => {
 
   socket.on("revert-card-effect", (gameData) => {
     let effectData;
-    let effectDatas = [];
     gameData.gameState.playerEffects.forEach((effect, index) => {
+      // Calls effectData inside revert func in case there are
+      // more than one effects needed to be reverted that turn
       if (effect.untilTurn === gameData.gameState.currentTurn) {
-        effectData = CARDS[effect.uuid].revertCardEffect(
+        const card = CARDS[effect.uuid] as ICard;
+        effectData = card.revertCardEffect(
           effectData ? effectData : gameData,
           effect
         );
@@ -132,16 +138,17 @@ io.sockets.on("connection", (socket) => {
 
       const players = [playerOne, playerTwo];
 
-      const playerOneDeck = [];
-      const playerTwoDeck = [];
+      const playerOneDeck: ICard[] = [];
+      const playerTwoDeck: ICard[] = [];
 
       const cards = ["EarthSoil", "SuperWarrior"];
 
       for (let card of cards) {
-        const cardImport = require("./Data/Cards/" + card + ".js");
-        const cardObj = new cardImport();
+        const cardImport = require("./Data/Cards/" + card + ".ts").default;
+        console.log(cardImport)
+        const cardObj = new cardImport() as ICard;
         cardObj.uuid = v4();
-        CARDS[cardObj.uuid] = cardObj;
+        CARDS[cardObj.uuid!] = cardObj;
         playerOneDeck.push(cardObj);
         playerTwoDeck.push(cardObj);
       }
